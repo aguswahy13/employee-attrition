@@ -1,21 +1,20 @@
+import os
 import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-# 1. Page Config
-st.set_page_config(
-    page_title="Employee Attrition Dashboard",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# 1) Determine the folder in which this script resides
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
-# 2. Load Data
+# 2) Build the CSV path by joining that folder with "data-clean.csv"
+DATA_PATH = os.path.join(BASE_DIR, "data-clean.csv")
+
 @st.cache_data
 def load_data(path):
     df = pd.read_csv(path)
     return df
 
-DATA_PATH = "data-clean.csv"
+# 3) Now load the data from the correct location
 df = load_data(DATA_PATH)
 
 # 3. Compute Metrics
